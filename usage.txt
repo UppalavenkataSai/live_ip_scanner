@@ -1,0 +1,17 @@
+step1 :
+      git clone githublink
+step 2:
+      pip install scapy
+step 3:
+      python ip_scanner.py
+step 4: 
+       network_range = "192.168.1.0/24"  # Change this to match your network
+
+OutPut :
+
+Scanning network: 192.168.1.0/24
+Live host found: 192.168.1.10
+Live host found: 192.168.1.15
+Live host found: 192.168.1.22
+Scan complete. 3 live hosts found.
+Live IP addresses: ['192.168.1.10', '192.168.1.15', '192.168.1.22']

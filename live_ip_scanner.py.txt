@@ -1,0 +1,31 @@
+from scapy.all import sr1, IP, ICMP
+import ipaddress
+
+def scan_network(network_range):
+    """
+    Scans the specified IP range to find live devices.
+
+    Args:
+        network_range (str): The network range in CIDR notation, e.g., "192.168.1.0/24".
+
+    Returns:
+        list: A list of live IP addresses.
+    """
+    live_hosts = []
+    network = ipaddress.IPv4Network(network_range)
+    print(f"Scanning network: {network_range}")
+
+    for ip in network.hosts():
+        response = sr1(IP(dst=str(ip))/ICMP(), timeout=1, verbose=0)
+        if response:
+            live_hosts.append(str(ip))
+            print(f"Live host found: {ip}")
+
+    print(f"Scan complete. {len(live_hosts)} live hosts found.")
+    return live_hosts
+
+# Usage example:
+if __name__ == "__main__":
+    network_range = "192.168.1.0/24"  # Specify your network range here
+    live_ips = scan_network(network_range)
+    print("Live IP addresses:", live_ips)
